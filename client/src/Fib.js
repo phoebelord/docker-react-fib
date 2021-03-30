@@ -24,11 +24,11 @@ class Fib extends Component {
   }
 
   renderSeenIndexes() {
-    return this.state.seenIndexes.map(({ i }) => i).join(", ");
+    return this.state.seenIndexes.map(({ number }) => number).join(", ");
   }
 
   renderValues() {
-    return Object.entries(this.state.values).map((key, value) => {
+    return Object.entries(this.state.values).map(([key, value]) => {
       return (
         <div key={key}>
           For index {key} I calculated {value}
@@ -41,6 +41,8 @@ class Fib extends Component {
     e.preventDefault();
     await axios.post("/api/values", { index: this.state.index });
     this.setState({ index: "" });
+    this.fetchIndexes();
+    this.fetchValues();
   };
 
   render() {
