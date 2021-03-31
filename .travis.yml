@@ -22,3 +22,15 @@ after_success:
   - docker push phoebelord/multi-nginx
   - docker push phoebelord/multi-server
   - docker push phoebelord/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-2
+  app: multi-docker
+  env: Multidocker-env
+  bucket_name: elasticbeanstalk-eu-west-2-807885366518
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
